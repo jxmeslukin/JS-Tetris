@@ -9,6 +9,13 @@ const startBtn = document.querySelector('#start-button');
 let nextRandom = 0
 let timerId
 let score = 0
+const colours = [
+  'orange',
+  'red',
+  'purple',
+  'green',
+  'blue'
+]
 
 console.log(squares);
 
@@ -112,6 +119,7 @@ function freeze() {
     draw()
     displayShape()
     addScore()
+    gameOver()
   }
 }
 
@@ -200,16 +208,27 @@ function addScore() {
   for (let i = 0; i < 199; i +=width) {
     const row = [i, i+1, i+2, i+3, i+4, i+5, i+6, i+7, i+8, i+9]
 
-    if(row.every(index=> square[index.classList.contains('taken'))) {
+    if(row.every(index => squares[index].classList.contains('taken'))) {
       score += 10
       scoreDisplay.innerHTML = score 
       row.forEach(index => {
         squares[index].classList.remove('taken')
+        squares[index].classList.remove('tetromino')
       })
       const squaresRemoved = squares.splice(i,width)
-      console.log(squaresRemoved)
+      squares = squaresRemoved.concat(squares)
+      squares.forEach(cell => grid.appendChild(cell))
     }
   } 
 }
+
+function gameOver() {
+  if(current.some(index => squares[currentPosition + index].classList.contains('taken'))) {
+    scoreDisplay.innerHTML = 'end'
+    clearInterval(timerId)
+
+  }
+}
+
 
 })
