@@ -123,6 +123,15 @@ function freeze() {
   }
 }
 
+   ///FIX ROTATION OF TETROMINOS A THE EDGE 
+   function isAtRight() {
+    return current.some(index=> (currentPosition + index + 1) % width === 0)  
+  }
+  
+  function isAtLeft() {
+    return current.some(index=> (currentPosition + index) % width === 0)
+  }
+
 //move tetromino left unless edge or blocked
 function moveLeft() {
   undraw()
@@ -226,7 +235,7 @@ function gameOver() {
   if(current.some(index => squares[currentPosition + index].classList.contains('taken'))) {
     scoreDisplay.innerHTML = 'end'
     clearInterval(timerId)
-
+    console.log("Game Over")
   }
 }
 
