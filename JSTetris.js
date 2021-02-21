@@ -99,7 +99,7 @@ function control(e) {
     moveDown()
   }
 }
-document.addEventListener('keyup', control)
+document.addEventListener('keydown', control)
 
 //move down function 
 function moveDown() {
@@ -125,7 +125,7 @@ function freeze() {
   }
 }
 
-   ///FIX ROTATION OF TETROMINOS A THE EDGE 
+   ///fix rotation on the edges
    function isAtRight() {
     return current.some(index=> (currentPosition + index + 1) % width === 0)  
   }
